@@ -156,6 +156,63 @@ class LinkedList {
             }
         }
     }
+    swapFirstAndLast(){
+        let curr = this.head;
+        let prev = null;
+        let first = this.head;
+
+        while(curr.next){
+            prev = curr;
+            curr = curr.next;
+        }
+        
+        if (first.next === curr) {
+        curr.next = first;
+        first.next = null;
+        this.head = curr;
+        return;
+    }
+        curr.next = first.next;
+        prev.next = first;
+        first.next = null;
+        
+        this.head=curr
+    }
+    findMiddle(head){
+        let slow =  head;
+        let fast = head;
+        while(fast.next && fast.next.next){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow
+    }
+    
+    mergeSort(head){
+        if(!head.next) return head
+        let middle = this.findMiddle(head);
+        let nextMiddle = middle.next;
+        middle.next = null;
+        let left = this.mergeSort(head);
+        let right = this.mergeSort(nextMiddle);
+        return this.merge(left,right)
+    }
+    merge(left,right){
+        if(!right) return left
+        if(!left) return right
+        
+        if(left.data < right.data){
+            left.next = this.merge(left.next,right)
+            return left
+        }else{
+            right.next = this.merge(right.next,left)
+            return right
+        }
+    }
+    sort(){
+        this.head = this.mergeSort(this.head)
+
+    }
     
     isEmpty(){
         return this.head === null
@@ -180,5 +237,6 @@ list.append(6);
 // console.log(list.findMiddle())
 // list.deleteMiddle();
 // list.removeDuplicatesSorted();
-list.removeDuplicatesUnsorted()
+// list.removeDuplicatesUnsorted()
+list.swapFirstAndLast()
 list.print();
