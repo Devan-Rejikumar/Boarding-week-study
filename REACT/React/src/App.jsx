@@ -1,15 +1,12 @@
 import React from 'react'
-import useUniqueNumbers from './useUniqueNumbers';
-
+import Child from './Child'
+import WindowResize from './WindowResize'
+import CheckBoxRef from './CheckBoxRef'
 
 const App = () => {
-      const numbers = 'devavvvananaaaa'
-      const uniqueNumbers = useUniqueNumbers(numbers);
   return (
-
     <div>
-      <h3>Unique Numbers</h3>
-      <h2>{uniqueNumbers.join(',')}</h2>
+      <CheckBoxRef />
     </div>
   )
 }
