@@ -1,4 +1,4 @@
-const obj = {
+const input = {
   a : 1,
   b : [1,2,3,4],
   c : 3,
@@ -7,36 +7,21 @@ const obj = {
   }
 }
 
-function deepCopy(obj){
-  
-         if(typeof obj !== 'object' || obj===null){
-    return obj
+function deepCopy(value){
+  if(value===null || typeof value!=='object'){
+    return value; 
+  }
+  let result;
+  if(Array.isArray(value)){
+    result = []
+  }else {
+    result = {};
   }
   
-
-      if(Array.isArray(obj)){
-         
-         const arr = [];
-         
-         for(let j of obj){
-           arr.push(deepCopy(j))
-         }
-         
-         return arr
-      }
-   
-   const ob = {};
-   
-   for(let k in obj){
-      ob[k] = deepCopy(obj[k])
-   }
-   return ob
+  for(let key in value){
+    result[key] = deepCopy(value[key])
+    
+  }
+  return result
 }
-
-
-const newobj = deepCopy(obj)
-
-
-obj.a = 90;
-console.log(newobj)
-console.log(obj)
+console.log(deepCopy(input))

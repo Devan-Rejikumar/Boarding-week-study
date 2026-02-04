@@ -42,7 +42,6 @@ class SinglyLinkedList {
     
     let slow = this.head;
     let fast = this.head;
-    let prev = slow
     while(fast.next && fast.next.next){
       fast = fast.next.next
       slow = slow.next
