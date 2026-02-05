@@ -1,23 +1,30 @@
-import { useEffect } from "react"
-import Child from "./Child"
-import { useState } from "react"
 
-export default function WindowResize () {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+import { useState } from 'react'
+import Child from './Child';
+import { useEffect } from 'react';
 
+const WindowResize = () => {
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
     useEffect(()=>{
 
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth)
-        }
+            const handleResize = () =>{
+        setWindowSize(window.innerWidth)
+    }
+    window.addEventListener('resize',handleResize)
+    
+   return () =>{
+     window.removeEventListener('resize', handleResize);
+   }
 
-        window.addEventListener('resize',handleResize)
-
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
     },[])
-    return (
-        <Child width={windowWidth}/>
-    )
+
+    
+  return (
+    <div>
+      <Child data={windowSize}/>
+    </div>
+  )
 }
+
+export default WindowResize
+
