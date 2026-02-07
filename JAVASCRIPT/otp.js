@@ -11,3 +11,6 @@ function generateOTP(){
   return otp
 }
 console.log(generateOTP())
+
+
+
